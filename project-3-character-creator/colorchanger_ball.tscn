@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cjii7ijlkxn8h"]
+
+[ext_resource type="Script" uid="uid://b6ltptndkmeux" path="res://colorchanger_ball.gd" id="1_anolv"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xbuwh"]
+bounce = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hapbe"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_lvvmh"]
+material = SubResource("StandardMaterial3D_hapbe")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2hhnk"]
+
+[node name="ColorchangerBall" type="RigidBody3D" unique_id=1392114239]
+physics_material_override = SubResource("PhysicsMaterial_xbuwh")
+contact_monitor = true
+max_contacts_reported = 10
+script = ExtResource("1_anolv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1476920731]
+mesh = SubResource("SphereMesh_lvvmh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=612789113]
+shape = SubResource("SphereShape3D_2hhnk")
+debug_color = Color(1, 1, 1, 1)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

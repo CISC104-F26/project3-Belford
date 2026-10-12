@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://bjntofk81kj4s"]
+
+[ext_resource type="Script" uid="uid://dxpri1103dpt2" path="res://player3D.gd" id="1_8tqwl"]
+[ext_resource type="Script" uid="uid://bfje01ev7xjs" path="res://box_area.gd" id="2_8xswo"]
+[ext_resource type="Script" uid="uid://mom1ncwprnmu" path="res://sphere_area.gd" id="3_ba1s6"]
+[ext_resource type="PackedScene" uid="uid://dt8x3ohurj78c" path="res://shrinking_ball.tscn" id="4_ba1s6"]
+[ext_resource type="PackedScene" uid="uid://cjii7ijlkxn8h" path="res://colorchanger_ball.tscn" id="5_jefae"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tvf64"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_8tqwl"]
+sky_material = SubResource("ProceduralSkyMaterial_tvf64")
+
+[sub_resource type="Environment" id="Environment_4yhan"]
+background_mode = 2
+sky = SubResource("Sky_8tqwl")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lvvmh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2hhnk"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2hhnk"]
+size = Vector2(30, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lvvmh"]
+size = Vector3(29.949463, 0.5020752, 29.774017)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lvvmh"]
+size = Vector3(1, 1.164978, 29.699768)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g1byt"]
+size = Vector3(1, 1.0441895, 29.518585)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2hhnk"]
+size = Vector3(5.9403076, 4.2667236, 6.0151367)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lvvmh"]
+radius = 4.364931
+
+[node name="3DPlayground" type="Node3D" unique_id=1022792488]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1406733187]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=836567318]
+environment = SubResource("Environment_4yhan")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=150553460]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7754095, 0)
+script = ExtResource("1_8tqwl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=464150805]
+mesh = SubResource("CapsuleMesh_lvvmh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=379335632]
+shape = SubResource("CapsuleShape3D_2hhnk")
+debug_color = Color(0.6584717, 0.3216804, 1, 0.41960785)
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1105218321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37016606, 2.1553063)
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=626054055]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=2058758094]
+mesh = SubResource("PlaneMesh_2hhnk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=2049207262]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.059692383, -0.2489624, -0.005264282)
+shape = SubResource("BoxShape3D_lvvmh")
+debug_color = Color(0.95450395, 0.21605763, 5.7756904e-07, 0.41960785)
+
+[node name="Wall" type="StaticBody3D" parent="." unique_id=912733079]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.965624, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall" unique_id=662265802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5552063, 0.5940857, 0.067230225)
+mesh = SubResource("BoxMesh_lvvmh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall" unique_id=2062364627]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3047123, 0.42468262, 0.1539154)
+shape = SubResource("BoxShape3D_g1byt")
+debug_color = Color(0.9975535, 0, 0.17340606, 0.41960785)
+
+[node name="Wall2" type="StaticBody3D" parent="." unique_id=1029017959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.975748, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall2" unique_id=788214682]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5552063, 0.5940857, 0.067230225)
+mesh = SubResource("BoxMesh_lvvmh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2" unique_id=914350503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3047123, 0.42468262, 0.1539154)
+shape = SubResource("BoxShape3D_g1byt")
+debug_color = Color(0.9975535, 0, 0.17340606, 0.41960785)
+
+[node name="Wall3" type="StaticBody3D" parent="." unique_id=449989303]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.40002918, 0, 13.61993)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall3" unique_id=1062188295]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5552063, 0.5940857, 0.067230225)
+mesh = SubResource("BoxMesh_lvvmh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3" unique_id=1149144413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3047123, 0.42468262, 0.1539154)
+shape = SubResource("BoxShape3D_g1byt")
+debug_color = Color(0.9975535, 0, 0.17340606, 0.41960785)
+
+[node name="Wall4" type="StaticBody3D" parent="." unique_id=993265250]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.40002918, 0, -15.182257)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall4" unique_id=1835524413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5552063, 0.5940857, 0.067230225)
+mesh = SubResource("BoxMesh_lvvmh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall4" unique_id=536892087]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3047123, 0.42468262, 0.1539154)
+shape = SubResource("BoxShape3D_g1byt")
+debug_color = Color(0.9975535, 0, 0.17340606, 0.41960785)
+
+[node name="BoxArea" type="Area3D" parent="." unique_id=236337730]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9683075, 0.6226301, -10.246717)
+script = ExtResource("2_8xswo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoxArea" unique_id=542433353]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4701538, 1.6333618, 2.5075684)
+shape = SubResource("BoxShape3D_2hhnk")
+debug_color = Color(0, 0.6156863, 0.5882353, 1)
+
+[node name="SphereArea" type="Area3D" parent="." unique_id=1220315477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.597193, 2.216362, 7.600195)
+script = ExtResource("3_ba1s6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SphereArea" unique_id=156329343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5934296, 2.9800625, -1.8978901)
+shape = SubResource("SphereShape3D_lvvmh")
+debug_color = Color(0.6392157, 0.5254902, 0, 1)
+
+[node name="ShrinkingBall" parent="." unique_id=378092959 instance=ExtResource("4_ba1s6")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 1.2166748, 6.23514, -8.790981)
+
+[node name="ColorchangerBall" parent="." unique_id=1392114239 instance=ExtResource("5_jefae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4, -7)
+
+[connection signal="body_entered" from="BoxArea" to="Player" method="_on_box_area_body_entered"]
+[connection signal="body_entered" from="BoxArea" to="BoxArea" method="_on_body_entered"]
+[connection signal="body_exited" from="BoxArea" to="Player" method="_on_box_area_body_exited"]
+[connection signal="body_exited" from="BoxArea" to="BoxArea" method="_on_body_exited"]
+[connection signal="body_entered" from="SphereArea" to="Player" method="_on_sphere_area_body_entered"]
+[connection signal="body_entered" from="SphereArea" to="SphereArea" method="_on_body_entered"]
+[connection signal="body_exited" from="SphereArea" to="Player" method="_on_sphere_area_body_exited"]
+[connection signal="body_exited" from="SphereArea" to="SphereArea" method="_on_body_exited"]
